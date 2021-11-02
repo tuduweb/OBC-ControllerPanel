@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "SettingComponentAbs.h"
+#include "SettingComponentAbs.hpp"
 
 class ButtonComponent : public SettingComponentAbs
 {
@@ -14,7 +14,7 @@ public:
 
 public slots:
 	void OnDataChanged(const QVariant& data) {};
-	void SetValue(int value) {};
+	void SetValue(int value) override { static auto i = value; };
 
 	//protected slots:
 };

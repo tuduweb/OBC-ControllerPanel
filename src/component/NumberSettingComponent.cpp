@@ -1,4 +1,4 @@
-﻿#include "NumberSettingComponent.h"
+﻿#include "NumberSettingComponent.hpp"
 #include "qdebug.h"
 
 HexSpinBox::HexSpinBox(QWidget* parent)

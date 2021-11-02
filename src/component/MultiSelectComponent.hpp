@@ -4,7 +4,7 @@
 # pragma execution_character_set("utf-8")
 #endif
 
-#include "SettingComponentAbs.h"
+#include "SettingComponentAbs.hpp"
 
 #include <QWidget>
 
@@ -32,7 +32,7 @@ signals:
 
 public slots:
 	void OnDataChanged(const QVariant& data);
-	void SetValue(int value);
+	void SetValue(int value) override;
 
 
 protected:

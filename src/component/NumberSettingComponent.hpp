@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "SettingComponentAbs.h"
+#include "SettingComponentAbs.hpp"
 
 #include <QWidget>
 #include <QLayout>
@@ -37,7 +37,7 @@ public:
 	~NumberSettingComponent();
 
 	void setRange(int min, int max);
-	bool LoadSettings(const QJsonObject& settings);
+	bool LoadSettings(const QJsonObject& settings) override;
 
 	//signals:
 	//	void ValueChanged(int id, int value);

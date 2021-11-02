@@ -1,10 +1,11 @@
 ﻿#pragma once
 
 #include <QWidget>
-#include "base/OBCBase.hpp"
+#include <QJsonObject>
+//#include "base/OBCBase.hpp"
 
-DECL_IDTYPE(ComponentId);
-Q_DECLARE_METATYPE(ComponentId);
+//DECL_IDTYPE(ComponentId);
+//Q_DECLARE_METATYPE(ComponentId);
 
 class SettingComponentAbs : public QWidget
 {
@@ -14,6 +15,8 @@ public:
 	SettingComponentAbs(int id, const QJsonObject& settings, QWidget* parent);
 	~SettingComponentAbs();
 
+	virtual void SetValue(int value) = 0;
+
 	virtual bool LoadSettings(const QJsonObject& settings) = 0;
 	const int Id() { return id; }
 signals:
@@ -22,7 +25,6 @@ signals:
 
 public slots:
 	//void SendEvent();
-	virtual void SetValue(int value) = 0;
 
 protected:
 	QString displayName;

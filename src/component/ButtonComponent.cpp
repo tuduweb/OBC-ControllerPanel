@@ -1,4 +1,4 @@
-﻿#include "ButtonComponent.h"
+﻿#include "ButtonComponent.hpp"
 
 #include <QLayout>
 #include <QPushButton>

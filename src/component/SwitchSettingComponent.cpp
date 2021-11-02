@@ -1,4 +1,4 @@
-﻿#include "SwitchSettingComponent.h"
+﻿#include "SwitchSettingComponent.hpp"
 
 #include <QPushButton>
 #include <QLayout>

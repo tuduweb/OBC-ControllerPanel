@@ -1,4 +1,4 @@
-﻿#include "SettingComponentAbs.h"
+﻿#include "SettingComponentAbs.hpp"
 
 SettingComponentAbs::SettingComponentAbs(int _id, const QJsonObject& settings, QWidget* parent)
 	: QWidget(parent)
