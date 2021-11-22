@@ -32,13 +32,17 @@ set(CONTROLLERPANEL_SOURCES
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Widgets SerialPort Quick WebSockets Network NetLinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets SerialPort Quick WebSockets Network LinguistTools REQUIRED)
 
+add_library(obc_controlPanel_baselib STATIC
+    ${SOURCES}
+)
+
 add_executable(ControllerPanel
     ${CONTROLLERPANEL_SOURCES}
 )
 
-### add extra qt library
-target_link_libraries(ControllerPanel
-    PRIVATE Qt${QT_VERSION_MAJOR}::Core
+# public not private, so other exe can link them ?
+target_link_libraries(obc_controlPanel_baselib
+    PUBLIC Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::SerialPort
     Qt${QT_VERSION_MAJOR}::Quick
@@ -46,3 +50,9 @@ target_link_libraries(ControllerPanel
     Qt${QT_VERSION_MAJOR}::Network
 )
 
+### add extra qt library
+target_link_libraries(ControllerPanel
+    PRIVATE obc_controlPanel_baselib
+)
+
+add_subdirectory(./examples)
