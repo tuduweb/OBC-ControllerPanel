@@ -40,6 +40,9 @@ add_executable(ControllerPanel
     ${CONTROLLERPANEL_SOURCES}
 )
 
+# obc-foundation
+include(./3rdparty/obc-foundation/OBCFoundation.cmake)
+
 # public not private, so other exe can link them ?
 target_link_libraries(obc_controlPanel_baselib
     PUBLIC Qt${QT_VERSION_MAJOR}::Core
@@ -48,6 +51,8 @@ target_link_libraries(obc_controlPanel_baselib
     Qt${QT_VERSION_MAJOR}::Quick
     Qt${QT_VERSION_MAJOR}::WebSockets
     Qt${QT_VERSION_MAJOR}::Network
+
+    obc_fondation
 )
 
 ### add extra qt library
