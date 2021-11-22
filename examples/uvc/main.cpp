@@ -8,6 +8,10 @@
 #include "component/ButtonComponent.hpp"
 #include "component/NumberSettingComponent.hpp"
 
+#include "panel/UVCControllPanel.hpp"
+
+using namespace OBC::Panel::ControlPanel;
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -29,11 +33,22 @@ int main(int argc, char *argv[])
     // SettingComponentAbs* component = new ButtonComponent(12,
     //     { {"displayName" , "状态查询"} }, &w);
 
-    layout.addWidget(new ButtonComponent(123, { {"displayName" , "状态查询"} }, &w));
+    QJsonObject methodsObj;
+    
+    QJsonArray items;
+    for(int i = 0; i < 5; ++i) {
+        QJsonArray _item{1,2,3,4,5};
+        items.append(_item);
+    }
+    methodsObj.insert("control", items);
 
-    SettingComponentAbs* number = new NumberSettingComponent(233,
-        { {"minValue", 0} , {"maxValue", 255}, {"displayName" , "视频增益"} }, &w);
-    layout.addWidget(number);
+    UVCControlPanel* panel = new UVCControlPanel(&w);
+
+    layout.addWidget(panel);
+
+    panel->loadSettings(methodsObj);
+
+    panel->ReloadGui();
 
 
     return app.exec();
