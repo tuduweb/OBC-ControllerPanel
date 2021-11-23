@@ -20,6 +20,7 @@ class HexSpinBox : public QSpinBox
 {
 public:
 	HexSpinBox(QWidget* parent);
+	~HexSpinBox();
 	QValidator::State validate(QString& text, int& pos) const;
 	QString textFromValue(int value) const;
 	int valueFromText(const QString& text) const;

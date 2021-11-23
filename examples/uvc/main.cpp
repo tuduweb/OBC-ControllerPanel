@@ -37,7 +37,8 @@ int main(int argc, char *argv[])
     
     QJsonArray items;
     for(int i = 0; i < 5; ++i) {
-        QJsonArray _item{1,2,3,4,5};
+        int max = random() % 200;
+        QJsonArray _item{1, 0, max, max / 10, 5};
         items.append(_item);
     }
     methodsObj.insert("control", items);

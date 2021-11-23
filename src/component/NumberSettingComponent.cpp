@@ -7,6 +7,14 @@ HexSpinBox::HexSpinBox(QWidget* parent)
 	setRange(0, 255);
 	validator = new QRegExpValidator(QRegExp("[0-9A-Fa-f]{1,8}"), this);
 }
+
+HexSpinBox::~HexSpinBox() {
+	// if(validator)
+	// 	delete 
+
+	//bind object system already
+}
+
 QValidator::State HexSpinBox::validate(QString& text, int& pos) const
 {
 	return validator->validate(text, pos);
@@ -21,7 +29,10 @@ int HexSpinBox::valueFromText(const QString& text) const
 	return text.toInt(&ok, 16);
 }
 
-
+/**
+ * QSpinBox and QSlider,
+ * qslider step is 1 cant be modifed, so we need apply STEP multiply qslider->value to show the result!
+ **/
 NumberSettingComponent::NumberSettingComponent(int _id, const QJsonObject& settings, QWidget* parent)
 	: SettingComponentAbs(_id, settings, parent)
 	, id(_id)
@@ -42,7 +53,7 @@ NumberSettingComponent::NumberSettingComponent(int _id, const QJsonObject& setti
 	slider = new QSlider(Qt::Horizontal, this);
 	slider->setMaximum(maxValue);
 	slider->setMinimum(minValue);
-	slider->setPageStep((maxValue - minValue) / 10);
+	//slider->setPageStep((maxValue - minValue) / 10); // not effect
 
 
 	//txt = new QLineEdit(QString::number(slider->value()), this);
@@ -55,6 +66,12 @@ NumberSettingComponent::NumberSettingComponent(int _id, const QJsonObject& setti
 
 	spin->setMaximum(maxValue);
 	spin->setMinimum(minValue);
+
+	//settings
+	if(_props.contains("step") && _props["step"].toInt() > 0) {
+		spin->setSingleStep(_props["step"].toInt());
+	}
+	//spin->setSingleStep(10);
 
 	layout->addWidget(label);
 	layout->addWidget(slider);
@@ -120,6 +137,8 @@ bool NumberSettingComponent::LoadSettings(const QJsonObject& settings)
 	if (settings.contains("minValue")) minValue = settings.value("minValue").toInt();
 	if (settings.contains("unitTxt")) unitTxt = settings.value("unitTxt").toString();
 	if (settings.contains("spinBoxType")) spinBoxType = settings.value("spinBoxType").toInt();
+
+	if (settings.contains("step")) _props["step"] = settings["step"].toVariant();
 
 	return true;
 }

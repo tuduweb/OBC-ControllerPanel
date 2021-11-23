@@ -19,6 +19,7 @@ namespace OBC::Panel::Component{
             : QWidget(parent), basicComponent(nullptr), layout(new QHBoxLayout(this))
         {
             setLayout(layout);
+            setContentsMargins(0, 0, 0, 0);
 
             const QJsonArray& config = settings["config"].toArray();
 
@@ -28,7 +29,8 @@ namespace OBC::Panel::Component{
                 {
                     {"minValue", config[1]},
                     {"maxValue", config[2]},
-                    {"displayName" , settings["displayName"]}
+                    {"displayName", settings["displayName"]},
+                    {"step", config[3]}
                 }, this);
 
             //component -> panel
@@ -63,6 +65,8 @@ namespace OBC::Panel::ControlPanel{
         UVCControlPanel(QWidget* parent = nullptr) : QWidget(parent) {
             QVBoxLayout* layout = new QVBoxLayout;
             setLayout(layout);
+            setContentsMargins(0, 0, 0, 0);
+
 
             layout->addWidget(new QLabel("hello Panel", this));
 
