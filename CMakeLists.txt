@@ -8,6 +8,10 @@ IF (APPLE)
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "/usr/local/opt/qt5/lib/cmake")
 ENDIF()
 
+if (MSVC)
+    # 设置 msvc 输入代码编码格式为 utf-8
+    set(CMAKE_C_FLAGS /source-charset:utf-8)
+endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)

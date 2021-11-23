@@ -1,5 +1,9 @@
 #pragma once
 
+#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
 #include "component/ButtonComponent.hpp"
 #include "component/NumberSettingComponent.hpp"
 #include "component/SwitchSettingComponent.hpp"
@@ -8,9 +12,9 @@
 
 #include <QWidget>
 
-class XtermSettingsWidget : public QWidget
+class XthermSettingsWidget : public QWidget
 {
     public:
-        XtermSettingsWidget(QWidget* parent = nullptr);
-        ~XtermSettingsWidget() = default;
+        XthermSettingsWidget(QWidget* parent = nullptr);
+        ~XthermSettingsWidget() = default;
 };
