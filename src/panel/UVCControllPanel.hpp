@@ -46,10 +46,9 @@ namespace OBC::Panel::Component{
         QHBoxLayout* layout;
 
     public slots:
-        //void OnKernelValuedChanged(int id, int value) {};
+        void OnKernelValuedChanged(int id, int value) { if(id != basicComponent->Id()) return; basicComponent->SetValue(value); };
     signals:
         void valueChanged(int id, int value);
-        void OnKernelValuedChanged(int id, int value) { if(id != basicComponent->Id()) return; basicComponent->SetValue(value); };
     };
 };
 
