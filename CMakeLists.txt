@@ -61,7 +61,7 @@ target_link_libraries(obc_controlPanel_baselib
 
 ### add extra qt library
 target_link_libraries(ControllerPanel
-    PRIVATE obc_controlPanel_baselib
+    PUBLIC obc_controlPanel_baselib
 )
 
 add_subdirectory(./examples)
