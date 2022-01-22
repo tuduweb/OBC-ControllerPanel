@@ -8,6 +8,10 @@ IF (APPLE)
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "/usr/local/opt/qt5/lib/cmake")
 ENDIF()
 
+if (MSVC)
+    # 设置 msvc 输入代码编码格式为 utf-8
+    set(CMAKE_C_FLAGS /source-charset:utf-8)
+endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -32,17 +36,32 @@ set(CONTROLLERPANEL_SOURCES
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Widgets SerialPort Quick WebSockets Network NetLinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets SerialPort Quick WebSockets Network LinguistTools REQUIRED)
 
+add_library(obc_controlPanel_baselib STATIC
+    ${SOURCES}
+)
+
 add_executable(ControllerPanel
     ${CONTROLLERPANEL_SOURCES}
 )
 
-### add extra qt library
-target_link_libraries(ControllerPanel
-    PRIVATE Qt${QT_VERSION_MAJOR}::Core
+# obc-foundation
+include(./3rdparty/obc-foundation/OBCFoundation.cmake)
+
+# public not private, so other exe can link them ?
+target_link_libraries(obc_controlPanel_baselib
+    PUBLIC Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::SerialPort
     Qt${QT_VERSION_MAJOR}::Quick
     Qt${QT_VERSION_MAJOR}::WebSockets
     Qt${QT_VERSION_MAJOR}::Network
+
+    obc_fondation
 )
 
+### add extra qt library
+target_link_libraries(ControllerPanel
+    PRIVATE obc_controlPanel_baselib
+)
+
+add_subdirectory(./examples)

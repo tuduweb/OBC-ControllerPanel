@@ -30,4 +30,6 @@ protected:
 	QString displayName;
 	const int id;
 	QString componentKey;//在一个Settings中对应唯一值
+
+	QMap<QString, QVariant> _props;
 };
