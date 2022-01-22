@@ -9,5 +9,8 @@ public:
 
     bool loadSettings(const QJsonObject& settingsObj) { return false; };
 public slots:
-    void HandleEvent(const QJsonObject& obj) {};
+    void HandleEvent(const QJsonObject& obj);
+    void OnComponentLogAvailable(const QString& log);
+    void OnComponentValueChanged(int id, int value);
+
 };
