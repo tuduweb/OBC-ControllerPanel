@@ -1,14 +1,15 @@
 #pragma once
 
-#include <QObject>
+#include <QWidget>
 
 
 
-class ControlInterface
+class ControlInterface : public QWidget
 {
+    Q_OBJECT
 
 public:
-    ControlInterface() {};
+    ControlInterface(QWidget* parent) : QWidget(parent) {};
     ~ControlInterface() {};
 
 signals:

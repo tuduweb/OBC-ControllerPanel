@@ -12,6 +12,8 @@
 
 #include "BasicControlPanel.hpp"
 
+#include "MockDevice.hpp"
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -43,8 +45,13 @@ int main(int argc, char *argv[])
         { {"selections", QJsonObject{{"大视场方向", 0}, {"小视场方向", 1}, {"超级方向", 2}}}, {"displayName" , "变焦"} }, &w);
     layout.addWidget(component);
 
+    MockDevice* mock = new MockDevice();
+
     BasicControlPanel* panel = new BasicControlPanel(&w);
     layout.addWidget(panel);
 
+    QObject::connect(panel, &BasicControlPanel::SendEvent, mock, &MockDevice::HandleEvent);
+    QObject::connect(mock, &MockDevice::SendEvent, panel, &BasicControlPanel::HandleEvent);
+    
     return app.exec();
 }

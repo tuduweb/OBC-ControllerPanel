@@ -33,7 +33,7 @@ BasicControlPanel::BasicControlPanel(QWidget* parent) : ControlPanelInterface(pa
 
     for(const auto& item : compontents) {
         connect(item, &SettingComponentAbs::OnLogAvailable, this, &BasicControlPanel::OnComponentLogAvailable, Qt::DirectConnection);
-        connect(item, &SettingComponentAbs::ValueChanged, this, )
+        connect(item, &SettingComponentAbs::ValueChanged, this, &BasicControlPanel::OnComponentValueChanged, Qt::DirectConnection);
     }
 
     // SettingComponentAbs *switchComponent = new SwitchSettingComponent(333,
@@ -61,10 +61,11 @@ void BasicControlPanel::OnComponentValueChanged(int id, int value)
     SettingComponentAbs* component = qobject_cast<SettingComponentAbs*>(sender());
     //
     QJsonObject obj;
+    obj.insert("type", 123);
     obj.insert("data", value);
     emit SendEvent(obj);
 }
 
 void BasicControlPanel::HandleEvent(const QJsonObject& obj) {
-    //
+    qDebug() << "panel handle" << obj["data"].toArray()[0];
 }

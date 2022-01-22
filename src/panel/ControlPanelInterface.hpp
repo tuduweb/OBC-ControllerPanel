@@ -2,10 +2,10 @@
 
 #include <QWidget>
 
-class ControlPanelInterface : public QWidget, ControlInterface 
+class ControlPanelInterface : public ControlInterface 
 {
 public:
-    ControlPanelInterface(QWidget* parent = nullptr) : QWidget(parent), ControlInterface(){};
+    ControlPanelInterface(QWidget* parent = nullptr) : ControlInterface(parent){};
 
 protected:
     virtual bool loadSettings(const QJsonObject& settingsObj) = 0;
